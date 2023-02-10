@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>404-Not Found</title>
+    <style>
+
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: black;
+        }
+
+        div{
+            width: 40%;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding-top: 50px;
+            font-size: 40px;
+        }
+
+        a{
+            text-decoration: none;
+            text-align: center;
+            padding: 15px;
+            margin: auto;
+            background-color: #4FC3F7;
+            color: white;
+            border-radius: 5px;
+            width: 30%;
+        }
+
+        div>img{
+            width: 70%;
+        }
+
+        @media screen and (min-width:200px) and (max-width:800px) {
+            body{
+                height:900px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a href="index.html"> Click Here To Search Again</a> <br><br><br>
+
+    </div> 
+    
+
+</body>
+
+</html>
+<script>
+    let div = document.querySelector("div");
+    cancelled()
+    function cancelled() {
+        let image = document.createElement("img")
+        image.src="https://media.tenor.com/LHFRM7dB4jwAAAAM/cross.gif"
+        let name = document.createElement("h3");
+        name.innerText="Movie Not Found"; 
+        div.append(image,name)
+    }
+
+</script>

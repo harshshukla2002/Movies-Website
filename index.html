@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie</title>
+    <style>
+         body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #nav{
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            align-items: center;
+            background-color: black;
+            color: #E57373;
+            border-radius: 5px;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        #nav>div>input, #nav>div>button{
+            padding: 10px;
+            width: 60%;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+        #nav>div>button{
+            padding: 10px;
+            margin:10px;
+            width: 40%;
+            border-radius: 5px;
+            background-color: #66BB6A;
+            color: white;
+            border: none;
+            font-size: 20px;
+        }
+
+        #box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 80%;
+            margin: auto;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        #box>div {
+            padding: 30px;
+            height: auto;
+            width: 80%;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            background-color: black;
+            border-radius: 10px;
+            color: white;
+            font-size: 20px;
+        }
+
+        #box>div>img {
+            width: 90%;
+        }
+
+        @media screen and (min-width:600px) and (max-width:1024px) {
+            #box {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (min-width:200px) and (max-width:600px) {
+            #box {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+  <div id="nav">
+    <h1>Movies</h1>
+    <div> <input type="text" id="name" placeholder="Enter Movie Name"> <button>Search</button> </div>
+  </div>
+
+  <div id="box">
+
+  </div>
+</body>
+
+</html>
+
+<script>
+    document.querySelector("button").addEventListener("click", getdata)
+    let MainDiv = document.querySelector("#box")
+    async function getdata() {
+        let value = document.querySelector("#name").value
+        let url = "https://www.omdbapi.com/?i=tt3896198&apikey=20e5aeb2&s=" + value
+        let res = await fetch(url);
+        let out = await res.json()
+        try{
+        display(out.Search)
+        }
+        catch{
+            window.location.href="cancelled.html"
+        }
+    }
+
+    function display(data){
+        MainDiv.innerHTML=null;
+        data.forEach( function(ele) {
+            let div = document.createElement("div");
+            let img = document.createElement("img");
+            img.src=ele.Poster;
+            let name = document.createElement("h3");
+            name.innerText=ele.Title;
+            let year = document.createElement("p");
+            year.innerText="year : " + ele.Year;
+            let Type = document.createElement("p");
+            Type.innerText= "Type : " +ele.Type; 
+            let id = document.createElement("p");
+            id.innerText= "imdbID : "  + ele.imdbID;
+            div.append(img,name,year,Type,id)
+            MainDiv.append(div)
+        });
+    }
+
+</script>
